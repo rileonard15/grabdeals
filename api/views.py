@@ -94,7 +94,7 @@ class OrderApiHandler(BaseHandler):
 
 
 class ProductInfo(BaseHandler):
-	authentication_classes = (SessionAuthentication, BasicAuthentication)
+	authentication_classes = (SessionAuthentication, TokenAuthentication)
 	permission_classes = (IsAuthenticated,)
 
 	def get(self, request, pcode=None):
