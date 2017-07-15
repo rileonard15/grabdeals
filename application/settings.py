@@ -26,7 +26,7 @@ SECRET_KEY = '$=b2_u8fefz8qe*_hn-+$75gljwn+1j_qds8*wqp27!@h4cfo$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -149,3 +149,9 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 CELERY_EAGER_PROPAGATES_EXCEPTIONS=True
+
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:4200',
+    '127.0.0.1:4200'
+)
