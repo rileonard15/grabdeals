@@ -31,15 +31,21 @@ class ColorSerializer(serializers.ModelSerializer):
         model = db.Size
         fields = ('name', 'tag',)
 
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = db.Image
+        fields = ('src',)
+
 
 class ProductSerializer(serializers.ModelSerializer):
     colors = ColorSerializer(read_only=True, many=True)
     sizes = SizeSerializer(read_only=True, many=True)
     categories = CategorySerializer(read_only=True, many=True)
+    images = ImageSerializer(read_only=True, many=True)
     class Meta:
         model = db.Product
         fields = ('name', 'description', 'quantity', 'code', 'owner',
-                  'price', 'colors', 'sizes', 'categories')
+                  'price', 'colors', 'sizes', 'categories', 'images',)
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
