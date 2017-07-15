@@ -68,6 +68,7 @@ class OrderApiHandler(BaseHandler):
 		data['status'] = "READY_FOR_DELIVERY"
 		data['size'] = self.request.data.get('size', 'n/a')
 		data['color'] = self.request.data.get('color', 'n/a')
+		data['transaction_id'] = uhack_reponse['transaction_id']
 
 		ins = OrderInstance.format_order_data(data, product_obj, self.request.user)
 		ins.create_order()

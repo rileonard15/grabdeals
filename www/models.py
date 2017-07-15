@@ -83,6 +83,7 @@ class Order(models.Model):
     product = models.ForeignKey(Product)
     quantity = models.IntegerField(default=1)
     invoice = models.CharField(max_length=10)
+    transaction_id = models.CharField(max_length=50, null=True)
     buyer = models.ForeignKey(User)
     paid = models.BooleanField(default=False)
     delivery_address = models.ForeignKey(DeliveryAddress, null=True)
