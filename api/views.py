@@ -76,6 +76,9 @@ class OrderApiHandler(BaseHandler):
 		if uhack_response['status'] == 'S':
 			data['paid'] = True
 			data['confirmation_no'] = uhack_response['confirmation_no']
+
+			product_obj.quantity = product_obj.quantity - int(self.request.data['quantity'])
+			product_obj.save()
 		else:
 			data['paid'] = False
 			data['confirmation_no'] = 'n/a'
