@@ -67,15 +67,15 @@ class OrderApiHandler(BaseHandler):
 		transaction_info['transaction_id'] = invoice_id
 		transaction_info['source'] = self.request.data['source']
 		transaction_info['amount'] = payables
-		uhack_reponse = json.loads(uhack.pay_amount(transaction_info))
+		uhack_response = json.loads(uhack.pay_amount(transaction_info))
 
 		data = dict()
 		data['quantity'] = self.request.data['quantity']
 		data['invoice'] = invoice_id
 
-		if uhack_reponse['status'] == 'S':
+		if uhack_response['status'] == 'S':
 			data['paid'] = True
-			data['confirmation_no'] = uhack_reponse['confirmation_no']
+			data['confirmation_no'] = uhack_response['confirmation_no']
 		else:
 			data['paid'] = False
 			data['confirmation_no'] = 'n/a'
@@ -84,13 +84,13 @@ class OrderApiHandler(BaseHandler):
 		data['status'] = "READY_FOR_DELIVERY"
 		data['size'] = self.request.data.get('size', 'n/a')
 		data['color'] = self.request.data.get('color', 'n/a')
-		data['transaction_id'] = uhack_reponse['transaction_id']
+		data['transaction_id'] = uhack_response['transaction_id']
 		data['amount'] = payables
 
 		ins = OrderInstance.format_order_data(data, product_obj, self.request.user)
-		ins.create_order()
+		order = ins.create_order()
 
-		return self.api_response(200, uhack_reponse)
+		return self.api_response(200, order)
 
 
 class ProductInfo(BaseHandler):
