@@ -15,7 +15,6 @@ from helpers.decorators import user_permission
 
 class FrontPage(BaseHandler):
 	def get(self, request):
-		self.tv['login_url'] = fb.generate_login_url()
 		return self.render(request, 'index.html')
 
 
