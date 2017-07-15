@@ -89,4 +89,6 @@ class Order(models.Model):
     delivery_address = models.ForeignKey(DeliveryAddress, null=True)
     color = models.CharField(max_length=10, null=True)
     size = models.CharField(max_length=10, null=True)
+    confirmation_no = models.CharField(max_length=100, null=True)
+    amount = models.FloatField(default=0)
     status = models.CharField(max_length=20, default='PENDING')  # PENDING | FOR_DELIVERY | SUCCESS

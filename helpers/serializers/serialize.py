@@ -45,4 +45,12 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = db.Order
         fields = ('product', 'quantity', 'invoice', 'buyer', 'paid', 'status',
-                  'color', 'size', 'delivery_address', 'transaction_id',)
+                  'color', 'size', 'delivery_address', 'transaction_id', 'amount',)
+
+
+class OrderProductSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
+    class Meta:
+        model = db.Order
+        fields = ('product', 'quantity', 'invoice', 'buyer', 'paid', 'status',
+                  'color', 'size', 'delivery_address', 'transaction_id', 'amount',)
