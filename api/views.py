@@ -94,6 +94,9 @@ class OrderApiHandler(BaseHandler):
 
 
 class ProductInfo(BaseHandler):
+	authentication_classes = (SessionAuthentication, BasicAuthentication)
+	permission_classes = (IsAuthenticated,)
+
 	def get(self, request, pcode=None):
 		ins = ProductInstance()
 		try:
