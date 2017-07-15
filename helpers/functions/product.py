@@ -17,6 +17,14 @@ class ProductInstance():
 
     @staticmethod
     def get_product(pcode):
+        if not pcode:
+            products = db.Product.objects.all()
+            serializer = s.ProductSerializer(data=products, many=True)
+            if serializer.is_valid():
+                serializer.save()
+
+            return serializer.data, products
+
         try:
             product = db.Product.objects.get(code=pcode)
         except Exception as e:
@@ -26,7 +34,7 @@ class ProductInstance():
         if serializer.is_valid():
             serializer.save()
 
-        return serializer.data, product
+        return serializer.data[0], product
 
 
     @classmethod

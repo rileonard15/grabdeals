@@ -94,7 +94,7 @@ class OrderApiHandler(BaseHandler):
 
 
 class ProductInfo(BaseHandler):
-	def get(self, request, pcode):
+	def get(self, request, pcode=None):
 		ins = ProductInstance()
 		try:
 			product, product_obj = ins.get_product(pcode)
