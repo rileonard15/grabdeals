@@ -93,6 +93,8 @@ class OrderApiHandler(BaseHandler):
 		ins = OrderInstance.format_order_data(data, product_obj, self.request.user)
 		order = ins.create_order()
 
+		order['rebate'] = 50
+
 		return self.api_response(200, order)
 
 
