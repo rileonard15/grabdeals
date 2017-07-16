@@ -30,8 +30,13 @@ class OrderInstance():
             serializer.is_valid()
             return serializer.data
 
-        transaction = db.Order.objects.filter(transaction_id=transaction)
-        serializer = s.OrderProductSerializer(data=[transaction], many=True)
+        try:
+            transaction = db.Order.objects.filter(transaction_id=transaction)
+            print("transaction obj")
+            print(transaction)
+            serializer = s.OrderProductSerializer(data=transaction, many=True)
+        except Exception as e:
+            print(str(e))
         serializer.is_valid()
         return serializer.data[0]
 
